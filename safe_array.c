@@ -17,18 +17,18 @@ array *new_array(unsigned int dimensions_number_size,unsigned int size_single_el
 		
 	array *this;
 	
-	
-
 	this = malloc(sizeof(*this));
 	this->size_single_element=size_single_element;
 	this->data=malloc(dimensions_number_size * size_single_element);
 	this->max_amount=dimensions_number_size;
 	this->allocation_value_function=allocation_value_function;
+
 	return this;
 }
 
 void *get_element_reference(array *object,unsigned int position)
 {
+	assert(object);
 	if(position >= object->max_amount) 
 	{
 		fprintf(stderr,"error invalid position array\n");
