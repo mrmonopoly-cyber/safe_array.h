@@ -23,3 +23,8 @@ I will implement the possibility to create multi dimensional array by default in
 
 
 
+//COMPILATION
+
+to compile a program with the library you have to include the header (safe_array.h) in the main 
+file and then to compile you have to use the object file (safe_array.o) 
+(es. gcc test.c safe_array.o will compile the example program in the repo)
