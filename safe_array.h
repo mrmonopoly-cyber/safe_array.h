@@ -1,8 +1,9 @@
 #ifndef safe_array
 #define safe_array
 
-typedef void * array;
+typedef void * array;	// the array is NOT omogeneus
 
+<<<<<<< HEAD
 // create a new full array with all the position of the array allocated but not instantiated, the funnction you pass is needed for istantiate a value when you need to set an element in the array;
 // dimensions_number_size 	: indicate the number of cells of the array
 // size_sigle_element		: indicate the sizeof of a single element of the array
@@ -25,13 +26,9 @@ extern void *get_element_reference(array *object,unsigned int *position);
 //otherwise the output of the function is 1
 extern unsigned int set_value_in_position(array *object,void *value,unsigned int *position); 
 
-//return the the max number of items you can store in the array
-extern unsigned int get_length(array *object);	
-
 //return the current amount of items in the array
 extern unsigned int get_current_umount(array *object);
 
-//destroy the array e set the pointer to NULL
-extern void destroy(void *object); 
+extern void destroy(void *object); //destroy the array and put the pointer to NULL
 
 #endif
