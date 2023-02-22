@@ -57,7 +57,7 @@ void *get_element_reference(array *object,unsigned int *position)
 		real_position+=(*t) * (relative_pos) ;
 		temp++;
 	}
-	return (object->data)+(real_position* object->size_single_element);
+	return (object->data)+(real_position * object->size_single_element);
 }
 
 unsigned int set_value_in_position(array *object,void *value,unsigned int *position)
@@ -76,6 +76,7 @@ unsigned int set_value_in_position(array *object,void *value,unsigned int *posit
 	for(position;*position;position++)
 	{
 		relative_position+=(*position) * (*(object->dimensions + count));
+		count++;
 	}
 
 	void * real_position=(object->data) + (relative_position * object->size_single_element);

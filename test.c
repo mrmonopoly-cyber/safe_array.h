@@ -14,19 +14,19 @@ void debug_object();
 
 void main()
 {
-	//debug_object();
-	size_t l=10;
-	size_t m=20;
-	size_t n=30;
-	void *d3d = calloc(l*m*n, sizeof(double));
-	for(int j=0;j<(l*m*n);j+=sizeof(double))
-	{
-		*((double *)(d3d +j)) = j;
-	}		
-	for(int j=0;j<(l*m*n);j+=sizeof(double))
-	{
-		printf("%lf\n",*((double *)(d3d +j)));
-	}	
+	debug_object();
+	//size_t l=10;
+	//size_t m=20;
+	//size_t n=30;
+	//void *d3d = calloc(l*m*n, sizeof(double));
+	//for(int j=0;j<(l*m*n);j+=sizeof(double))
+	//{
+	//	*((double *)(d3d +j)) = j;
+	//}		
+	//for(int j=0;j<(l*m*n);j+=sizeof(double))
+	//{
+	//	printf("%lf\n",*((double *)(d3d +j)));
+	//}	
 } 
 
 
