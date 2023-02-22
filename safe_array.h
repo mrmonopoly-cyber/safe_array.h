@@ -11,19 +11,19 @@ typedef void * array;
 // 				{
 //					*(int *)position=*(int *) value;
 // 				}
-array *new_array(unsigned int dimensions_number_size,unsigned int size_single_element,void (*allocation_value_function) (void *,void *));
+array *new_array(unsigned int *dimensions_number_size,unsigned int size_single_element,void (*allocation_value_function) (void *,void *));
 
 //return a poiter to a position of the array
 //if the operation is not possible because the position you indicate is out of the array
 //the function terminate with return NULL and print in output (stderr) an error message
 //otherwise the output of the function is the pointer to the data
-extern void *get_element_reference(array *object,unsigned int position); 
+extern void *get_element_reference(array *object,unsigned int *position); 
 
 //instantiate the values in a specific position of the array
 //if the operation is not possible because the position you indicate is out of the array
 //the function terminate with return 0 and print in output (stderr) an error message
 //otherwise the output of the function is 1
-extern unsigned int set_value_in_position(array *object,void *value,int position); 
+extern unsigned int set_value_in_position(array *object,void *value,unsigned int *position); 
 
 //return the the max number of items you can store in the array
 extern unsigned int get_length(array *object);	
