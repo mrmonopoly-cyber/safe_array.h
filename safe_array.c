@@ -43,6 +43,7 @@ array *new_array(unsigned int *dimensions_number_size,unsigned int size_single_e
 
 void *get_element_reference(array *object,unsigned int *position)
 {
+	assert(object);
 	//if(position >= object->max_amount) 
 	//{
 	//	fprintf(stderr,"error invalid position array\n");
