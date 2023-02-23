@@ -17,7 +17,7 @@ array *new_array(unsigned int *dimensions_number_size,unsigned int number_elemen
 //if the operation is not possible because the position you indicate is out of the array
 //the function terminate with return NULL and print in output (stderr) an error message
 //otherwise the output of the function is the pointer to the data
-extern void *get_element_reference(array *object,unsigned int *position); 
+extern void *get_element_reference(array *object,unsigned int *position,unsigned int elements_in_array_position); 
 
 //instantiate the values in a specific position of the array
 //if the operation is not possible because the position you indicate is out of the array

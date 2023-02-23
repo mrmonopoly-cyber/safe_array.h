@@ -14,12 +14,13 @@ typedef struct array
 }array;
 
 array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *));
-void *get_element_reference(array *object,unsigned int *position);
+void *get_element_reference(array *object,unsigned int *position,unsigned int elements_in_array_position);
 unsigned int set_value_in_position(array *object,void *value,unsigned int *position,unsigned int elements_in_array_position);
 unsigned int get_length(array *object);
 unsigned int get_current_umount(array *object);
 void destroy(void *object);
 int scope_amount(array *object,unsigned int relative_position,unsigned int block);
+void * get_real_position(array * object,unsigned int * position,unsigned int elements_in_array_position);
 
 array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *))
 {
@@ -53,43 +54,19 @@ array *new_array(unsigned int *dimensions_number_size,unsigned int number_elemen
 	return this;
 }
 
-void *get_element_reference(array *object,unsigned int *position)
+void *get_element_reference(array *object,unsigned int *position,unsigned int elements_in_array_position)
 {
 	assert(object);
-	//if(position >= object->max_amount) 
-	//{
-	//	fprintf(stderr,"error invalid position array\n");
-	//	return NULL;
-	//}
-	unsigned int real_position=0;
-	unsigned int relative_pos=0;
-	unsigned int temp=0;
-	for(unsigned int *t=position;*t;t++)
-	{
-		relative_pos = *(object->dimensions + temp); 
-		real_position+=(*t) * (relative_pos) ;
-		temp++;
-	}
-	return (object->data)+(real_position * object->size_single_element);
+	void *data = get_real_position(object,position,elements_in_array_position);
+	return data;
 }
 
 unsigned int set_value_in_position(array *object,void *value,unsigned int *position,unsigned int elements_in_array_position)
 {
 	assert(object);
 	assert(value);
-	
-	unsigned int relative_position=0;
-	unsigned int count;
-	
-	for(count =0;count<elements_in_array_position;count++)
-	{	
-		relative_position+=scope_amount(object,*(position+count),count);
-		printf("count=%d\trelative position=%d\tscope amount=%d\n",count,*(position+count),relative_position);
-	}
-
-	
-
-	//object->allocation_value_function(real_position,value);
+	void * point_data = get_real_position(object,position,elements_in_array_position);
+	object->allocation_value_function(point_data,value);
 	object->number_items++;
 
 	return 1;
@@ -117,14 +94,41 @@ void destroy(void *object)
 
 int scope_amount(array *object,unsigned int relative_position,unsigned int block)
 {
+	if(relative_position >= *(object->dimensions + block))
+	{
+		fprintf(stderr,"error out of bounds\n");
+		return -1;
+	} 
 	unsigned int scope_amount=1;
-	unsigned int index=object->number_of_dimensions-1-block;
+	for(int i=block+1;i<object->number_of_dimensions;i++)
+	{
+		scope_amount*=*(object->dimensions + i);
+	}
 	
-	for(index;index>0;index--)
-	{	
-		printf("index=%d\t*(dimesion+index)=%d\n",index,*(object->dimensions+index));
-		scope_amount*=*(object->dimensions+index);
-	}	
-
 	return relative_position * scope_amount;
 }
+
+void * get_real_position(array * object,unsigned int * position,unsigned int elements_in_array_position){ 
+	unsigned int relative_position=0;
+	unsigned int real_position;
+	void *point_data;
+	unsigned int count;
+	int untested_amount;
+	for(count =0;count<elements_in_array_position;count++)
+	{	
+		untested_amount=scope_amount(object,*(position+count),count);
+		if(untested_amount!=-1)
+		{
+			relative_position+=untested_amount;
+			printf("count=%d\trelative position=%d\tscope amount=%d\n",count,*(position+count),relative_position);
+		}else
+		{
+			fprintf(stderr,"error out of bounds recognized\nNot gonna instert item\n");
+			return NULL;
+		}
+	}
+	real_position=relative_position*object->size_single_element;
+	point_data=object->data+real_position;
+	return point_data;
+}
+
