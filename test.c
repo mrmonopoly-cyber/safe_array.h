@@ -41,23 +41,17 @@ void debug_object()
 	char *possible_out;
  	array * this;
 	
-	unsigned int position[1]={0};
-	unsigned int dimension[1]={5};
+	unsigned int position[3]={4,1,2};
+	unsigned int dimension[3]={5,2,3};
+	printf("dimensions= %d\t%d\t%d\n",dimension[0],dimension[1],dimension[2]);
 	unsigned int value[5] = {1,2,3,4};
-	this = new_array(dimension,sizeof(*struct_possible),test_allocation_function);
-	for(*position;*position<*dimension;(*position)++)
-	{	
-		set_value_in_position(this,&value[*position],position);
-	}
-	for(*position=0;*position<*dimension;(*position)++)
-	{
-		possible_out = get_element_reference(this,position);
-		if(possible_out != NULL)
-		{	
-			struct test *vt = (struct test *)possible_out;
-			printf("value %d in position %d of array\n",vt->a,*position);
-			possible_out = NULL;
-		}
-	}
+	this = new_array(dimension,3,sizeof(*struct_possible),test_allocation_function);
+	printf("allocation complete\n");
+	
+	set_value_in_position(this,&value[2],position,3);
+
+	//struct test * data = (struct test *) get_element_reference(this,position);
+	//printf("first element of array= %d\n",data->a);
+	
 	return;
 }
