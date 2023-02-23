@@ -34,10 +34,8 @@ array *new_array(unsigned int *dimensions_number_size,unsigned int number_elemen
 	{
 		total_memory*= *(dimensions_number_size + count);
 		number_of_dimensions++;
-		printf("total_memory = %d and single dimension amount=%d\n\n",total_memory,*(dimensions_number_size + count));
 	}
 	total_memory*=size_single_element;
-	printf("total_memory with sizeof = %d\n",total_memory);
 
 	this = malloc(sizeof(*this));
 	this->size_single_element=size_single_element;
@@ -63,8 +61,6 @@ void *get_element_reference(array *object,unsigned int *position,unsigned int el
 
 unsigned int set_value_in_position(array *object,void *value,unsigned int *position,unsigned int elements_in_array_position)
 {
-	assert(object);
-	assert(value);
 	void * point_data = get_real_position(object,position,elements_in_array_position);
 	object->allocation_value_function(point_data,value);
 	object->number_items++;
@@ -120,7 +116,6 @@ void * get_real_position(array * object,unsigned int * position,unsigned int ele
 		if(untested_amount!=-1)
 		{
 			relative_position+=untested_amount;
-			printf("count=%d\trelative position=%d\tscope amount=%d\n",count,*(position+count),relative_position);
 		}else
 		{
 			fprintf(stderr,"error out of bounds recognized\nNot gonna instert item\n");
