@@ -49,7 +49,6 @@ unsigned int set_value_in_position(array *object,void *value,unsigned int positi
 	}
 	void * real_position=(object->data) + (position*object->size_single_element);
 	object->allocation_value_function(real_position,value);
-	object->number_items++;
 
 	return 1;
 }
