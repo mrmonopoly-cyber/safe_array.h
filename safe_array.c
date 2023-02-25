@@ -2,6 +2,8 @@
 #include <assert.h>
 #include <stdio.h>
 
+
+//private 
 typedef struct array
 {
 	unsigned int number_items;
@@ -13,12 +15,15 @@ typedef struct array
 	void *data;
 }array;
 
+//public
 array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *));
 void *get_element_reference(array *object,unsigned int *position,unsigned int elements_in_array_position);
 unsigned int set_value_in_position(array *object,void *value,unsigned int *position,unsigned int elements_in_array_position);
 unsigned int get_length(array *object);
 unsigned int get_current_umount(array *object);
 void destroy(void *object);
+
+//private 
 int scope_amount(array *object,unsigned int relative_position,unsigned int block);
 void * get_real_position(array * object,unsigned int * position,unsigned int elements_in_array_position);
 
