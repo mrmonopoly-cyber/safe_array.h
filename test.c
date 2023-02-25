@@ -32,7 +32,7 @@ void debug_object()
 	
 	unsigned int position=0;
 	unsigned int dimension =5;
-	unsigned int value[5] = {1,2,3,4};
+	unsigned int value[5] = {1,2,3,4,5};
 	this = new_array(dimension,sizeof(*struct_possible),test_allocation_function);
 	
 	for(position;position<dimension;position++)
