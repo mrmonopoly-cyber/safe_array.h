@@ -4,14 +4,15 @@
 typedef void * array;
 
 // create a new full array with all the position of the array allocated but not instantiated, the funnction you pass is needed for istantiate a value when you need to set an element in the array;
-// dimensions_number_size 	: indicate the number of cells of the array
-// size_sigle_element		: indicate the sizeof of a single element of the array
-// allocation_function		: this function pointer indicate how to give the value to an alement in the array in a specific position 
-// 				(es. allocation_value_function(void *position, void *value) in this case i consider an array of integer
-// 				{
-//					*(int *)position=*(int *) value;
-// 				}
-array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *));
+// dimensions_number_size 			: an array that indicate the number of cells of each dimension of array
+// number_of_elements_array_dimension_size	: indicate the numbero of elements in the array dimensions_number_size; 
+// size_sigle_element				: indicate the sizeof of a single element of the array
+// allocation_function				: this function pointer indicate how to give the value to an alement in the array in a specific position 
+// 							(es. allocation_value_function(void *position, void *value) in this case i consider an array of integer
+// 							{
+//								*(int *)position=*(int *) value;
+// 							}
+array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array_dimensions_number_size,unsigned int size_single_element,void (*allocation_value_function) (void *,void *));
 
 //return a poiter to a position of the array
 //if the operation is not possible because the position you indicate is out of the array
