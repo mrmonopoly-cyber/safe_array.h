@@ -6,7 +6,6 @@
 //private 
 typedef struct array
 {
-	unsigned int number_items;
 	unsigned int size_single_element;
 	unsigned int *dimensions;
 	unsigned int max_amount;
@@ -20,7 +19,6 @@ array *new_array(unsigned int *dimensions_number_size,unsigned int number_elemen
 void *get_element_reference(array *object,unsigned int *position,unsigned int elements_in_array_position);
 unsigned int set_value_in_position(array *object,void *value,unsigned int *position,unsigned int elements_in_array_position);
 unsigned int get_length(array *object);
-unsigned int get_current_umount(array *object);
 void destroy(void *object);
 
 //private 
@@ -68,7 +66,6 @@ unsigned int set_value_in_position(array *object,void *value,unsigned int *posit
 {
 	void * point_data = get_real_position(object,position,elements_in_array_position);
 	object->allocation_value_function(point_data,value);
-	object->number_items++;
 
 	return 1;
 }
@@ -77,12 +74,6 @@ unsigned int get_length(array *object)
 {
 	assert(object);
 	return object->max_amount;
-}
-
-unsigned int get_current_umount(array *object)
-{
-	assert(object);
-	return ((array *) object)->number_items;
 }
 
 void destroy(void *object)

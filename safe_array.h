@@ -29,9 +29,6 @@ unsigned int set_value_in_position(array *object,void *value,unsigned int *posit
 //return the the max number of items you can store in the array
 extern unsigned int get_length(array *object);	
 
-//return the current amount of items in the array
-extern unsigned int get_current_umount(array *object);
-
 //destroy the array e set the pointer to NULL
 extern void destroy(void *object); 
 
