@@ -9,7 +9,7 @@ This branch has the porpouse of implementing the capability of multidimensional 
 The multi dimensional ability of library is working, it's possible to crate a multiple dimensional array, setting a value in a position, getting an element in a posiotion, getting corrent number instantiated
 in the array, give the maximum capacity of the array, destroy the array and set the pointer to NULL
 
-Right now the costs of implementing the multidimensional array consist in at least 8 more Bytes needed for the creation of the array,the searching for a pointer in the array given the position need
+Right now the costs of implementing the multidimensional array consist in at least 16 more Bytes needed for the creation of the array,the searching for a pointer in the array given the position need
 O(2^n) step where n is the number of dimensions of the array.
 Right now i'm considering to implement a thread implementation to reduce the time maybe using a gpu (if present in the machine). Still thinking, need to mesure the medium demension of the array used in
 development and if it's worth the multithreading. If necessary i can create a branch for multithreading designed for high dimensions matrix operations(from 10-infinite)
