@@ -5,7 +5,6 @@
 typedef struct array
 {
 	unsigned int number_items;
- 	unsigned int max_amount;
 	unsigned int size_single_element;
 	void (*allocation_value_function) (void *,void*);
 	void *data;
@@ -19,8 +18,8 @@ array *new_array(unsigned int dimensions_number_size,unsigned int size_single_el
 	
 	this = malloc(sizeof(*this));
 	this->size_single_element=size_single_element;
+	this->number_items=dimensions_number_size;
 	this->data=malloc(dimensions_number_size * size_single_element);
-	this->max_amount=dimensions_number_size;
 	this->allocation_value_function=allocation_value_function;
 
 	return this;
@@ -29,7 +28,8 @@ array *new_array(unsigned int dimensions_number_size,unsigned int size_single_el
 void *get_element_reference(array *object,unsigned int position)
 {
 	assert(object);
-	if(position >= object->max_amount) 
+	unsigned int size_element = object->size_single_element;
+	if((position * size_element) >= (object->number_items * size_element)) 
 	{
 		fprintf(stderr,"error invalid position array\n");
 		return NULL;
@@ -41,8 +41,8 @@ unsigned int set_value_in_position(array *object,void *value,unsigned int positi
 {
 	assert(object);
 	assert(value);
-	
-	if(position >= object->max_amount)
+	unsigned int size_element = object->size_single_element;
+	if((position * size_element) >= (object->number_items * size_element)) 
 	{ 
 		fprintf(stderr,"error invalid position array\n");
 		return 0;
@@ -57,7 +57,7 @@ unsigned int set_value_in_position(array *object,void *value,unsigned int positi
 unsigned int get_length(array *object)
 {
 	assert(object);
-	return object->max_amount;
+	return object->size_single_element * object->number_items;
 }
 
 unsigned int get_current_umount(array *object)
