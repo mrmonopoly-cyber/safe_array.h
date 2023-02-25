@@ -6,6 +6,11 @@ The challenge of the library is to remove the unsafe aspect of the array in C wh
 For now the array you create is filled from the start to the end. When you want to insert a new item you have to pass the value of the proprieties of the object, not the object itself.
 
 This branch has the porpouse of implementing the capability of multidimensional array. 
+The multi dimensional ability of library is working, it's possible to crate a multiple dimensional array, setting a value in a position, getting an element in a posiotion, getting corrent number instantiated
+in the array, give the maximum capacity of the array, destroy the array and set the pointer to NULL
+
+Right now the costs of implementing the multidimensional array consist in at least 
+
 
 //PROBLEMS
 There is still a bug: where you ask for an item in the array, the system will give you a poiter to the data.  with that pointer you can do whatever you want, even exced the limit of the array and go beyong.
