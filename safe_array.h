@@ -25,9 +25,6 @@ extern void *get_element_reference(array *object,unsigned int position);
 //otherwise the output of the function is 1
 extern unsigned int set_value_in_position(array *object,void *value,unsigned int position); 
 
-//return the current amount of items in the array
-extern unsigned int get_current_umount(array *object);
-
 extern void destroy(void *object); //destroy the array and put the pointer to NULL
 
 #endif

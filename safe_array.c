@@ -5,7 +5,6 @@
 typedef struct array
 {
 	unsigned int max_amount;
-	unsigned int number_items;
 	unsigned int size_single_element;
 	void (*allocation_value_function) (void *,void*);
 	void *data;
@@ -18,7 +17,6 @@ array *new_array(unsigned int dimensions_number_size,unsigned int size_single_el
 	array *this;
 	
 	this = malloc(sizeof(*this));
-	this->number_items = 0;
 	this->size_single_element=size_single_element;
 	this->number_items=dimensions_number_size;
 	this->data=malloc(dimensions_number_size * size_single_element);
@@ -51,7 +49,6 @@ unsigned int set_value_in_position(array *object,void *value,unsigned int positi
 	}
 	void * real_position=(object->data) + (position*object->size_single_element);
 	object->allocation_value_function(real_position,value);
-	object->number_items++;
 	return 1;
 }
 
@@ -59,12 +56,6 @@ unsigned int get_length(array *object)
 {
 	assert(object);
 	return object->max_amount;
-}
-
-unsigned int get_current_umount(array *object)
-{
-	assert(object);
-	return ((array *) object)->number_items;
 }
 
 void destroy(void *object)
