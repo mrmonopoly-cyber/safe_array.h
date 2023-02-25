@@ -39,9 +39,10 @@ void debug_object()
 {	
 	struct test *struct_possible;
 	char *possible_out;
- 	array * this;
+	void *data; 
+	array * this;
 	
-	unsigned int position[2]={3,4};
+	unsigned int position[2]={0,0};
 	unsigned int dimension[2]={4,5};
 	printf("dimensions= %d\t%d\t%d\n",dimension[0],dimension[1],dimension[2]);
 	unsigned int value[5] = {1,2,3,4,5};
@@ -49,11 +50,6 @@ void debug_object()
 	printf("allocation complete\n");
 	
 
-	set_value_in_position(this,&value[0],position,2);
-	void *data=get_element_reference(this,position,2);
-	printf("%d-th element of array is %d\n",0,((struct test *)data)->a);
-	position[0]=0;
-	position[1]=0;
 	for(int i=0;i<5;i++)
 	{
 		set_value_in_position(this,&value[i],position,2);
@@ -63,8 +59,8 @@ void debug_object()
 	for(int i=0;i<5;i++)
 	{
 		data=get_element_reference(this,position,2);
-		position[1]+=10;
 		if(data!=NULL)printf("%d-th element of array is %d\n",i,((struct test *)data)->a);
+		position[1]++;
 		data=NULL;
 	}
 
