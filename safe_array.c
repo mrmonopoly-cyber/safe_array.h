@@ -18,7 +18,7 @@ void *get_element_reference(array *object,unsigned int position);
 unsigned int set_value_in_position(array *object,void *value,unsigned int position);
 unsigned int get_length(array *object);
 void destroy(void *object);
-
+//implementation
 array *new_array(unsigned int dimensions_number_size,unsigned int size_single_element,void (*allocation_value_function) (void *,void *))
 {
 	assert(dimensions_number_size);
