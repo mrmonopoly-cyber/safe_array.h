@@ -38,10 +38,10 @@ array *new_array(unsigned int *dimensions_number_size,unsigned int number_elemen
 		total_memory*= *(dimensions_number_size + count);
 		number_of_dimensions++;
 	}
+	this->max_amount=total_memory;
 	total_memory*=size_single_element;
 
 	this = malloc(sizeof(*this));
-	this->max_amount=0;
 	this->size_single_element=size_single_element;
 	this->data=malloc(total_memory);
 	this->dimensions=malloc((number_of_dimensions) * (sizeof (*this->dimensions)));
@@ -64,10 +64,14 @@ void *get_element_reference(array *object,unsigned int *position,unsigned int el
 
 unsigned int set_value_in_position(array *object,void *value,unsigned int *position,unsigned int elements_in_array_position)
 {
-	void * point_data = get_real_position(object,position,elements_in_array_position);
-	object->allocation_value_function(point_data,value);
-
-	return 1;
+	void *point_data = get_real_position(object,position,elements_in_array_position);
+	if(point_data != NULL)
+	{
+		object->allocation_value_function(point_data,value);
+		return 1;
+	}
+	fprintf(stderr,"error with the insertion of item\n"); 
+	return 0;
 }
 
 unsigned int get_length(array *object)

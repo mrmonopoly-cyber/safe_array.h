@@ -43,15 +43,17 @@ void debug_object()
 	array * this;
 	
 	unsigned int position[2]={0,0};
-	unsigned int dimension[2]={4,5};
+	unsigned int dimension[2]={2,3};
 	printf("dimensions= %d\t%d\t%d\n",dimension[0],dimension[1],dimension[2]);
-	unsigned int value[5] = {1,2,3,4,5};
+	unsigned int value[6] = {1,2,3,4,5,6};
 	this = new_array(dimension,2,sizeof(*struct_possible),test_allocation_function);
 	printf("allocation complete\n");
+	printf("max amount element in array =%d\n",get_length(this));
 	
 
 	for(int i=0;i<5;i++)
 	{
+		printf("inserting element in position 0 %d wich is %d\n",i,value[i]); 
 		set_value_in_position(this,&value[i],position,2);
 		position[1]++;
 	}
