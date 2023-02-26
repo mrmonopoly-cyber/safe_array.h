@@ -5,24 +5,24 @@
 //private 
 typedef struct array
 {
-	unsigned int size_single_element;
-	unsigned int *dimensions;
-	unsigned int max_amount;
-	unsigned int number_of_dimensions;
-	void (*allocation_value_function) (void *,void*);
-	void *data;
+	unsigned int max_amount;				//max number of items that the array is capable of mantain
+	unsigned int size_single_element;			//number of bytes needed for a single element of the array
+	unsigned int number_of_dimensions;			//number of dimensions of the array
+	unsigned int *dimensions;				//array with the size of all dimensions
+	void (*allocation_value_function) (void *,void*);	//function to instantiate the value of the array
+	void *data;						//array with the data
 }array;
 
+int scope_amount(array *object,unsigned int relative_position,unsigned int block);				//return, if possible, the scope amount for the current dimension
+void * get_real_position(array * object,unsigned int * position,unsigned int elements_in_array_position);	//return, if possible, the pointer to the position of the array indicated in the array position 
+
+
 //public
-array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *));
+array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *));	
 void *get_element_reference(array *object,unsigned int *position,unsigned int elements_in_array_position);
 unsigned int set_value_in_position(array *object,void *value,unsigned int *position,unsigned int elements_in_array_position);
 unsigned int get_length(array *object);
 void destroy(void *object);
-
-//private 
-int scope_amount(array *object,unsigned int relative_position,unsigned int block);
-void * get_real_position(array * object,unsigned int * position,unsigned int elements_in_array_position);
 
 array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *))
 {
