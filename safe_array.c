@@ -59,6 +59,23 @@ void *get_element_reference(array *object,unsigned int *position,unsigned int el
 {
 	assert(object);
 	void *data = get_real_position(object,position,elements_in_array_position);
+	if(data == NULL)
+	{
+		fprintf(stderr,"error retrieving an item in position: ");
+		fprintf(stderr,"%d",*(position));
+		for(int i =1;i<elements_in_array_position;i++)
+		{
+			fprintf(stderr,",%d",*(position+i));
+		} 
+		fprintf(stderr," dimensions of array are: ");
+		fprintf(stderr,"%d",*(object->dimensions));
+		for(int i =1;i<elements_in_array_position;i++)
+		{
+			fprintf(stderr,",%d",*(object->dimensions+i));
+		} 
+		
+		fprintf(stderr,"\n");
+	}
 	return data;
 }
 
