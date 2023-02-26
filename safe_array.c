@@ -2,7 +2,6 @@
 #include <assert.h>
 #include <stdio.h>
 
-
 //private 
 typedef struct array
 {
@@ -33,31 +32,41 @@ array *new_array(unsigned int *dimensions_number_size,unsigned int number_elemen
 	
 	unsigned int total_memory=1;
 	unsigned int number_of_dimensions=0;
-	for(unsigned int count=0;count < number_element_array;count++)
+	unsigned int count=0;
+
+
+	this = malloc(sizeof(*this));
+	
+	//calculate the total amount to allocate to memorize the array , calculate also the number of dimensions of the array itself 
+	for(count=0;count < number_element_array;count++)
 	{
 		total_memory*= *(dimensions_number_size + count);
 		number_of_dimensions++;
 	}
+
+	//instantion of value of this
 	this->max_amount=total_memory;
 	total_memory*=size_single_element;
-
-	this = malloc(sizeof(*this));
 	this->size_single_element=size_single_element;
 	this->data=malloc(total_memory);
 	this->dimensions=malloc((number_of_dimensions) * (sizeof (*this->dimensions)));
 	this->number_of_dimensions=number_of_dimensions;
+	this->allocation_value_function=allocation_value_function;
 	for(unsigned int i=0;i<number_of_dimensions;i++)
 	{
 		*(this->dimensions+i)=*(dimensions_number_size+i);
 	}	
-	this->allocation_value_function=allocation_value_function;
-
+	
 	return this;
 }
 
 void *get_element_reference(array *object,unsigned int *position,unsigned int elements_in_array_position)
 {
-	assert(object);
+	if(object == NULL)
+	{
+		fprintf(stderr,"NULL pointer reference for object\n");
+		return NULL;
+	}
 	void *data = get_real_position(object,position,elements_in_array_position);
 	if(data == NULL)
 	{
@@ -93,13 +102,21 @@ unsigned int set_value_in_position(array *object,void *value,unsigned int *posit
 
 unsigned int get_length(array *object)
 {
-	assert(object);
+	if(object == NULL)
+	{
+		fprintf(stderr,"NULL pointer reference for object\n");
+		return -1;
+	}
 	return object->max_amount;
 }
 
 void destroy(void *object)
 {
-	assert(object);
+	if(object == NULL)
+	{
+		fprintf(stderr,"NULL pointer reference for object\n");
+		return;
+	}
 	free(object);
 	object=NULL;
 }
