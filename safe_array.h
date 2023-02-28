@@ -12,8 +12,8 @@ typedef void * array;
 // 							{
 //								*(int *)position=*(int *) value;
 // 							}
-array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array_dimensions_number_size,unsigned int size_single_element,void (*allocation_value_function) (void *,void *));
-
+//print_element					: this function is needed to say the system how to print in stdout the an element of the array
+array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *),void (*print_element) (void *));
 //return a poiter to a position of the array
 //if the operation is not possible because the position you indicate is out of the array
 //the function terminate with return NULL and print in output (stderr) an error message
@@ -32,4 +32,6 @@ extern unsigned int get_length(array *object);
 //destroy the array e set the pointer to NULL
 extern void destroy(void *object); 
 
+//print all the element in the array 
+void print_array(array *object);
 #endif

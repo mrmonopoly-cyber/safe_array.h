@@ -10,6 +10,7 @@ typedef struct array
 	unsigned int number_of_dimensions;			//number of dimensions of the array
 	unsigned int *dimensions;				//array with the size of all dimensions
 	void (*allocation_value_function) (void *,void*);	//function to instantiate the value of the array
+	void (*print_element) (void *);				//function to print a single element in the array
 	void *data;						//array with the data
 }array;
 
@@ -18,13 +19,14 @@ void * get_real_position(array * object,unsigned int * position,unsigned int ele
 
 
 //public
-array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *));	
+array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *),void (*print_element) (void *));
 void *get_element_reference(array *object,unsigned int *position,unsigned int elements_in_array_position);
 unsigned int set_value_in_position(array *object,void *value,unsigned int *position,unsigned int elements_in_array_position);
 unsigned int get_length(array *object);
 void destroy(void *object);
+void print_array(array *object);
 //implementation
-array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *))
+array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *),void (*print_element) (void *))
 {
 	assert(dimensions_number_size);
 		
@@ -52,6 +54,7 @@ array *new_array(unsigned int *dimensions_number_size,unsigned int number_elemen
 	this->dimensions=malloc((number_of_dimensions) * (sizeof (*this->dimensions)));
 	this->number_of_dimensions=number_of_dimensions;
 	this->allocation_value_function=allocation_value_function;
+	this->print_element=print_element;
 	for(unsigned int i=0;i<number_of_dimensions;i++)
 	{
 		*(this->dimensions+i)=*(dimensions_number_size+i);
@@ -120,6 +123,32 @@ void destroy(void *object)
 	free(object);
 	object=NULL;
 }
+
+void print_array(array *object)
+{
+	unsigned int count=0;
+	void * point_data = NULL;
+	unsigned int total_memory=1;
+	for(count=0;count < object->number_of_dimensions;count++)
+	{
+		total_memory*= *(object->dimensions + count);
+	}
+	for(count=0;count < (total_memory*object->size_single_element);count+=(object->size_single_element))
+	{
+		point_data = object->data + count;
+		if(point_data != NULL)
+		{
+			object->print_element(point_data);
+			point_data=NULL;
+		}else
+		{
+			printf("NULL");
+		}
+		printf("\n");
+	}
+
+}
+
 
 //ausiliary function
 int scope_amount(array *object,unsigned int relative_position,unsigned int block)

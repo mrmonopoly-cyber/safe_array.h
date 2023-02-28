@@ -7,7 +7,7 @@ For now the array you create is filled from the start to the end. When you want 
 
 This branch has the porpouse of implementing the capability of multidimensional array. 
 The multi dimensional ability of library is working, it's possible to crate a multiple dimensional array, setting a value in a position, getting an element in a posiotion, getting corrent number instantiated
-in the array, give the maximum capacity of the array, destroy the array and set the pointer to NULL
+in the array, give the maximum capacity of the array, destroy the array and set the pointer to NULL, print all the elements in the array.
 
 Right now the costs of implementing the multidimensional array consist in at least 16 more Bytes needed for the creation of the array,the searching for a pointer in the array given the position need
 O(2^n) step where n is the number of dimensions of the array.
