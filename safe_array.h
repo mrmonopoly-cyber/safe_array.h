@@ -1,7 +1,7 @@
 #ifndef safe_array
 #define safe_array
 
-typedef void * array;
+typedef void array;
 
 // create a new full array with all the position of the array allocated but not instantiated, the funnction you pass is needed for istantiate a value when you need to set an element in the array;
 // dimensions_number_size 			: an array that indicate the number of cells of each dimension of array
@@ -30,7 +30,7 @@ unsigned int set_value_in_position(array *object,void *value,unsigned int *posit
 extern unsigned int get_length(array *object);	
 
 //destroy the array e set the pointer to NULL
-extern void destroy(void *object); 
+extern void destroy(array *object); 
 
 //print all the element in the array 
 void print_array(array *object);
