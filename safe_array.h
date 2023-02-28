@@ -11,8 +11,8 @@ typedef void * array;	// the array is NOT omogeneus
 // 				{
 //					*(int *)position=*(int *) value;
 // 				}
-array *new_array(unsigned int dimensions_number_size,unsigned int size_single_element,void (*allocation_value_function) (void *,void *));
-
+//print_element			: this function indicate how to print an element of the array
+array *new_array(unsigned int dimensions_number_size,unsigned int size_single_element,void (*allocation_value_function) (void *,void *),void (*print_element) (void *));
 //return a poiter to a position of the array
 //if the operation is not possible because the position you indicate is out of the array
 //the function terminate with return NULL and print in output (stderr) an error message
@@ -25,6 +25,7 @@ extern void *get_element_reference(array *object,unsigned int position);
 //otherwise the output of the function is 1
 extern unsigned int set_value_in_position(array *object,void *value,unsigned int position); 
 
-extern void destroy(void *object); //destroy the array and put the pointer to NULL
+extern void destroy(array *object); //destroy the array and put the pointer to NULL
 
+extern void print_array(array *object);
 #endif

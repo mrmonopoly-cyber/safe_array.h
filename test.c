@@ -11,6 +11,7 @@ struct test
 
 void test_allocation_function(void *position,void *data);
 void debug_object();
+void print_test(void *input);
 
 void main()
 {
@@ -24,6 +25,11 @@ void test_allocation_function(void *position,void *data)
 	((struct test *)position)->a=*(int *)data;
 }
 
+void print_test(void *input)
+{
+	struct test *point_data = (struct test *) input;
+	printf("%d\n",point_data->a);
+}
 void debug_object()
 {	
 	struct test *struct_possible;
@@ -33,7 +39,7 @@ void debug_object()
 	unsigned int position=0;
 	unsigned int dimension =5;
 	unsigned int value[5] = {1,2,3,4,5};
-	this = new_array(dimension,sizeof(*struct_possible),test_allocation_function);
+	this = new_array(dimension,sizeof(*struct_possible),test_allocation_function,print_test);
 	
 	for(position;position<dimension;position++)
 	{	
@@ -49,5 +55,6 @@ void debug_object()
 			possible_out = NULL;
 		}
 	}
+	print_array(this);
 	return;
 }

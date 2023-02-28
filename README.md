@@ -8,7 +8,8 @@ For now the array you create is filled from the start to the end. When you want 
 
 
 //FEATURES
-Right now the system is capable of creating a mono dimensional array,setting values of data in the array, getting a pointer to an element in the array, destroy the array, get the size of the array.
+Right now the system is capable of creating a mono dimensional array,setting values of data in the array, getting a pointer to an element in the array, destroy the array, get the size of the array.,
+print all the array 
 The step needed to access to an item in the array is constant and consists in 2 steps: 
     1 - access the object itself 
     2 - access to the item you wanna know.(if you need a proprieties of the array you only need 1 step to access it)
