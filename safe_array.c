@@ -24,8 +24,10 @@ void print_array(array *object);
 //implementation
 array *new_array(unsigned int dimensions_number_size,unsigned int size_single_element,void (*print_element) (void *))
 {
-	assert(dimensions_number_size);
-		
+	if(dimensions_number_size == 0 || size_single_element == 0)
+	{
+		fprintf(stderr,"invalid dimensions_number_size or invalid size_single_element\n");
+	}
 	array *this;
 	
 	this = malloc(sizeof(*this));
@@ -38,7 +40,11 @@ array *new_array(unsigned int dimensions_number_size,unsigned int size_single_el
 
 void *get_element_reference(array *object,unsigned int position)
 {
-	assert(object);
+	if(object == NULL)
+	{
+		fprintf(stderr,"invalid array\n");
+		return NULL;
+	}
 	unsigned int size_element = object->size_single_element;
 	if((position * size_element) >= (object->max_amount * size_element)) 
 	{
@@ -50,8 +56,11 @@ void *get_element_reference(array *object,unsigned int position)
 
 unsigned int set_value_in_position(array *object,void *value,unsigned int position)
 {
-	assert(object);
-	assert(value);
+	if(object == NULL || value == NULL)
+	{
+		fprintf(stderr,"invalid array or invalid value \n");
+		return 0;
+	}
 	unsigned int size_element = object->size_single_element;
 	if((position * size_element) >= (object->max_amount * size_element)) 
 	{ 
@@ -71,13 +80,21 @@ unsigned int get_length(array *object)
 
 void destroy(void *object)
 {
-	assert(object);
+	if(object == NULL)
+	{
+		fprintf(stderr,"invalid array\n");
+		return;
+	}
 	free(object);
 	object=NULL;
 }
-
 void print_array(array *object)
 {
+	if(object == NULL)
+	{
+		fprintf(stderr,"invalid array\n");
+		return;
+	}
 	unsigned int count = 0;
 	void *point_data = NULL;
 	for(count =0; count < (object->max_amount * object->size_single_element);count +=object->size_single_element)
