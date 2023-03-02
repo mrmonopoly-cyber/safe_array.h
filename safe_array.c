@@ -132,6 +132,11 @@ void destroy(void *object)
 
 void print_array(array *object)
 {
+	if(object == NULL)
+	{
+		fprintf(stderr,"invalid array\n");
+		return;
+	}
 	unsigned int count=0;
 	void * point_data = NULL;
 	unsigned int total_memory=1;
