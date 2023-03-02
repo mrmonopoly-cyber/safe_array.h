@@ -17,13 +17,6 @@ void main()
 	debug_object();
 } 
 
-
-void test_allocation_function(void *position,void *data)
-{
-	((struct test *)position)->a=*(int *)data;
-	return;
-}
-
 void print_el_test(void * input)
 {
 	struct test *data=(struct test *) input;
@@ -40,7 +33,7 @@ void debug_object()
 	unsigned int dimension[2]={4,5};
 	printf("dimensions= %d\t%d\t%d\n",dimension[0],dimension[1],dimension[2]);
 	unsigned int value[6] = {1,2,3,4,5,6};
-	this = new_array(dimension,2,sizeof(*struct_possible),test_allocation_function,print_el_test);
+	this = new_array(dimension,2,sizeof(*struct_possible),print_el_test);
 	printf("allocation complete\n");
 	printf("max amount element in array =%d\n",get_length(this));
 	

@@ -9,24 +9,23 @@ typedef struct array
 	unsigned int size_single_element;			//number of bytes needed for a single element of the array
 	unsigned int number_of_dimensions;			//number of dimensions of the array
 	unsigned int *dimensions;				//array with the size of all dimensions
-	void (*allocation_value_function) (void *,void*);	//function to instantiate the value of the array
 	void (*print_element) (void *);				//function to print a single element in the array
 	void *data;						//array with the data
 }array;
 
 int scope_amount(array *object,unsigned int relative_position,unsigned int block);				//return, if possible, the scope amount for the current dimension
 void * get_real_position(array * object,unsigned int * position,unsigned int elements_in_array_position);	//return, if possible, the pointer to the position of the array indicated in the array position 
-
+void allocation_function(void *position,void *value, array *object);
 
 //public
-array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *),void (*print_element) (void *));
+array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*print_element) (void *));
 void *get_element_reference(array *object,unsigned int *position,unsigned int elements_in_array_position);
 unsigned int set_value_in_position(array *object,void *value,unsigned int *position,unsigned int elements_in_array_position);
 unsigned int get_length(array *object);
 void destroy(void *object);
 void print_array(array *object);
 //implementation
-array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *),void (*print_element) (void *))
+array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*print_element) (void *))
 {
 	assert(dimensions_number_size);
 		
@@ -53,7 +52,6 @@ array *new_array(unsigned int *dimensions_number_size,unsigned int number_elemen
 	this->data=malloc(total_memory);
 	this->dimensions=malloc((number_of_dimensions) * (sizeof (*this->dimensions)));
 	this->number_of_dimensions=number_of_dimensions;
-	this->allocation_value_function=allocation_value_function;
 	this->print_element=print_element;
 	for(unsigned int i=0;i<number_of_dimensions;i++)
 	{
@@ -96,7 +94,7 @@ unsigned int set_value_in_position(array *object,void *value,unsigned int *posit
 	void *point_data = get_real_position(object,position,elements_in_array_position);
 	if(point_data != NULL)
 	{
-		object->allocation_value_function(point_data,value);
+		allocation_function(point_data,value,object);
 		return 1;
 	}
 	fprintf(stderr,"error with the insertion of item\n"); 
@@ -190,3 +188,16 @@ void * get_real_position(array * object,unsigned int * position,unsigned int ele
 	return point_data;
 }
 
+void allocation_function(void *position,void *value, array *object)
+{
+	char * cast_position = (char *) position;
+	char * cast_value = (char *) value;
+	unsigned int size_element = object->size_single_element;
+	unsigned int count = 0;	
+
+	for(count =0;count < size_element;count++)
+	{
+		*(cast_position + count) = *(cast_value + count);
+	}
+	return;
+}

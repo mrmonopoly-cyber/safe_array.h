@@ -7,13 +7,12 @@ typedef void array;
 // dimensions_number_size 			: an array that indicate the number of cells of each dimension of array
 // number_of_elements_array_dimension_size	: indicate the numbero of elements in the array dimensions_number_size; 
 // size_sigle_element				: indicate the sizeof of a single element of the array
-// allocation_function				: this function pointer indicate how to give the value to an alement in the array in a specific position 
 // 							(es. allocation_value_function(void *position, void *value) in this case i consider an array of integer
 // 							{
 //								*(int *)position=*(int *) value;
 // 							}
 //print_element					: this function is needed to say the system how to print in stdout the an element of the array
-array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*allocation_value_function) (void *,void *),void (*print_element) (void *));
+array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*print_element) (void *));
 //return a poiter to a position of the array
 //if the operation is not possible because the position you indicate is out of the array
 //the function terminate with return NULL and print in output (stderr) an error message
