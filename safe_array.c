@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <assert.h>
 #include <stdio.h>
 
 //private 
@@ -27,21 +26,30 @@ void print_array(array *object);
 //implementation
 array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*print_element) (void *))
 {
-	assert(dimensions_number_size);
+	if(dimensions_number_size == NULL || number_element_array == 0  || size_single_element == 0)
+	{
+		fprintf(stderr,"invalid dimensions array or invalid number_element_array or invalid size_single_element \n");
+		return NULL;
+	}
 		
 	array *this;
-	
 	unsigned int total_memory=1;
 	unsigned int number_of_dimensions=0;
 	unsigned int count=0;
-
+	unsigned int temp=0;
 
 	this = malloc(sizeof(*this));
 	
 	//calculate the total amount to allocate to memorize the array , calculate also the number of dimensions of the array itself 
 	for(count=0;count < number_element_array;count++)
 	{
-		total_memory*= *(dimensions_number_size + count);
+		temp = (*(dimensions_number_size + count));
+		if(temp == 0)
+		{	
+			fprintf(stderr,"invalid size dimension\n");
+			return NULL;
+		}
+		total_memory*= temp;
 		number_of_dimensions++;
 	}
 
@@ -55,7 +63,7 @@ array *new_array(unsigned int *dimensions_number_size,unsigned int number_elemen
 	this->print_element=print_element;
 	for(unsigned int i=0;i<number_of_dimensions;i++)
 	{
-		*(this->dimensions+i)=*(dimensions_number_size+i);
+		*(this->dimensions+i)=*(dimensions_number_size + i);
 	}	
 	
 	return this;
