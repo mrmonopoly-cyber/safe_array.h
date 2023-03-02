@@ -7,21 +7,22 @@ typedef struct array
 {
 	unsigned int max_amount;				//max number of items the array can contain
 	unsigned int size_single_element;			//sizeof (single element of array) in bytes
-	void (*allocation_value_function) (void *,void*);	//function to instantiate the value of an element of the array
 	void (*print_element) (void *);				//function to print in stdout a single element 
 	void *data;						//pointer to the array
 }array;
 
+void allocation_function(void * position,void * value, array *object);
+
 //public
 
-array *new_array(unsigned int dimensions_number_size,unsigned int size_single_element,void (*allocation_value_function) (void *,void *),void (*print_element) (void *));
+array *new_array(unsigned int dimensions_number_size,unsigned int size_single_element,void (*print_element) (void *));
 void *get_element_reference(array *object,unsigned int position);
 unsigned int set_value_in_position(array *object,void *value,unsigned int position);
 unsigned int get_length(array *object);
 void destroy(void *object);
 void print_array(array *object);
 //implementation
-array *new_array(unsigned int dimensions_number_size,unsigned int size_single_element,void (*allocation_value_function) (void *,void *),void (*print_element) (void *))
+array *new_array(unsigned int dimensions_number_size,unsigned int size_single_element,void (*print_element) (void *))
 {
 	assert(dimensions_number_size);
 		
@@ -31,7 +32,6 @@ array *new_array(unsigned int dimensions_number_size,unsigned int size_single_el
 	this->max_amount=dimensions_number_size;
 	this->size_single_element=size_single_element;
 	this->data=malloc(dimensions_number_size * size_single_element);
-	this->allocation_value_function=allocation_value_function;
 	this->print_element=print_element;
 	return this;
 }
@@ -59,7 +59,7 @@ unsigned int set_value_in_position(array *object,void *value,unsigned int positi
 		return 0;
 	}
 	void * real_position=(object->data) + (position*object->size_single_element);
-	object->allocation_value_function(real_position,value);
+	allocation_function(real_position,value,object);
 	return 1;
 }
 
@@ -93,4 +93,18 @@ void print_array(array *object)
 		}
 		printf("\n");
 	}
+}
+
+void allocation_function(void * position,void * value, array *object)
+{
+	char * cast_position = (char *) position;
+	char * cast_value = (char *) value;
+	unsigned int size_element = object->size_single_element;
+	unsigned int count = 0;
+
+	for(count = 0;count < size_element; count++)
+	{
+		*(cast_position + count) = *(cast_value + count);
+	}	
+	return;
 }

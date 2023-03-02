@@ -12,7 +12,7 @@ typedef void * array;	// the array is NOT omogeneus
 //					*(int *)position=*(int *) value;
 // 				}
 //print_element			: this function indicate how to print an element of the array
-array *new_array(unsigned int dimensions_number_size,unsigned int size_single_element,void (*allocation_value_function) (void *,void *),void (*print_element) (void *));
+array *new_array(unsigned int dimensions_number_size,unsigned int size_single_element,void (*print_element) (void *));
 //return a poiter to a position of the array
 //if the operation is not possible because the position you indicate is out of the array
 //the function terminate with return NULL and print in output (stderr) an error message
