@@ -15,7 +15,7 @@ typedef struct array
 
 int scope_amount(array *object,unsigned int relative_position,unsigned int block);				//return, if possible, the scope amount for the current dimension
 void * get_real_position(array * object,unsigned int * position,unsigned int elements_in_array_position);	//return, if possible, the pointer to the position of the array indicated in the array position 
-void allocation_function(void *position,void *value, array *object);
+void allocation_function(void *position,void *value, array *object);						//instantiate a single element of the array
 
 //public
 array *new_array(unsigned int *dimensions_number_size,unsigned int number_element_array,unsigned int size_single_element,void (*print_element) (void *));
