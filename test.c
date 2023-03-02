@@ -29,7 +29,7 @@ void debug_object()
 	void *data; 
 	array * this;
 	
-	unsigned int position[2]={3,0};
+	unsigned int position[1]={3};
 	unsigned int dimension[2]={4,5};
 	printf("dimensions= %d\t%d\t%d\n",dimension[0],dimension[1],dimension[2]);
 	unsigned int value[6] = {1,2,3,4,5,6};
@@ -41,13 +41,13 @@ void debug_object()
 	for(int i=0;i<5;i++)
 	{
 		printf("inserting element in position 0 %d wich is %d\n",i,value[i]); 
-		set_value_in_position(this,&value[i],position,2);
+		set_value_in_position(this,&value[i],position);
 		position[1]++;
 	}
 	position[1]=0;
 	for(int i=0;i<5;i++)
 	{
-		data=get_element_reference(this,position,2);
+		data=get_element_reference(this,position);
 		if(data!=NULL)printf("%d-th element of array is %d\n",i,((struct test *)data)->a);
 		position[1]++;
 		data=NULL;
