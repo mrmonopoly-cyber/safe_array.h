@@ -1,7 +1,7 @@
 #ifndef safe_array
 #define safe_array
 
-typedef void * array;	// the array is NOT omogeneus
+typedef void * array;	
 
 // create a new full array with all the position of the array allocated but not instantiated, the funnction you pass is needed for istantiate a value when you need to set an element in the array;
 // dimensions_number_size 	: indicate the number of cells of the array
