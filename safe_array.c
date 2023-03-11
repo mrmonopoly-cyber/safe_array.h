@@ -28,7 +28,6 @@ array *new_array(unsigned int dimensions_number_size,unsigned int size_single_el
 		fprintf(stderr,"invalid dimensions_number_size or invalid size_single_element\n");
 	}
 	array *this;
-	
 	this = malloc(sizeof(*this));
 	this->max_amount=dimensions_number_size;
 	this->size_single_element=size_single_element;
