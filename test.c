@@ -41,7 +41,7 @@ void debug_object()
 	
 	for(position=0;position<dimension;position++)
 	{	
-		copy_element_in_array(this,&value[position],position);
+		move_element_in_array(this,&value[position],position);
 	}
 	for(position=0;position<dimension;position++)
 	{

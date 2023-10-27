@@ -49,7 +49,7 @@ static int insert_data(array *this, void *ele_to_insert, unsigned long index, un
             }
             break;
         case MOVE:
-            index_to_store = ele_to_insert;   
+            *(char *)index_to_store = *(char *)ele_to_insert;   
             break;
         default:
             goto invalid_case;
