@@ -97,12 +97,12 @@ array *new_array_full(unsigned long data_size, unsigned long array_len,
 
 int copy_element_in_array(array *this,void *ele_to_insert, unsigned long index)
 {
-    insert_data(this,ele_to_insert,index,COPY);
+    return insert_data(this,ele_to_insert,index,COPY);
 }
 
 int move_element_in_array(array *this,void *ele_to_insert, unsigned long index)
 {
-    insert_data(this,ele_to_insert,index,MOVE);
+    return insert_data(this,ele_to_insert,index,MOVE);
 }
 
 void * get_element(array *this, unsigned long index)
