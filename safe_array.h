@@ -10,6 +10,8 @@ array *new_array_full(unsigned long data_size, unsigned long array_len,
 
 int copy_element_in_array(array *this,void *ele_to_insert, unsigned long index);
 
+int move_element_in_array(array *this,void *ele_to_insert, unsigned long index)
+
 void * get_element(array *this, unsigned long index);
 
 int print_array(array *this);
